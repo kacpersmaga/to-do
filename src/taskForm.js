@@ -45,7 +45,7 @@ class TaskForm {
         });
     }
 
-    handleTaskFormSubmission(taskCreateInfo) {
+    handleTaskFormSubmission(taskCreateInfo, currentCategory) {
         taskCreateInfo.addEventListener('submit', (event) => {
             event.preventDefault();
 
@@ -54,7 +54,7 @@ class TaskForm {
             const priority = taskCreateInfo.querySelector('#priority').value;
 
             const task = new Task(taskName, dueDate, priority);
-            this.taskManager.addTask(task);
+            this.taskManager.addTask(task, currentCategory);
 
             taskCreateInfo.remove();
             document.querySelector('.add-task-button').style.display = 'block';

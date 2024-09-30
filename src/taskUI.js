@@ -17,13 +17,17 @@ class TaskUI {
 
         const checkbox = project.querySelector('.task-checkbox');
         checkbox.addEventListener('change', () => {
-            project.remove();
+            task.completed = checkbox.checked;  // Update completed status
+            project.remove();  // Optionally remove task from UI
         });
     }
 
     clearTaskUI() {
         const taskContainer = document.querySelector('.task-container');
-        taskContainer.innerHTML = '';
+        if(taskContainer){
+            taskContainer.innerHTML = '';
+        }
+
     }
 }
 
