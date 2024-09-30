@@ -14,20 +14,20 @@ const completedPage = createCompletedPage(taskManager, taskForm);
 
 const selectPage = (page) => {
     const main = document.querySelector('main');
-    main.innerHTML = '';  // Clear the main content
+    main.innerHTML = ''; 
     main.appendChild(page);
 
 
 
     if (page === todayPage) {
         const todayTasks = taskManager.getTodayTasks();
-        taskManager.renderTasks(todayTasks);  // Render only today's tasks
+        taskManager.renderTasks(todayTasks);
     } else if (page === completedPage) {
         const completedTasks = taskManager.getCompletedTasks();
-        taskManager.renderTasks(completedTasks);  // Render only completed tasks
-    } else {  // Default to the "All" page
+        taskManager.renderTasks(completedTasks);
+    } else { 
         const incompleteTasks = taskManager.getIncompleteTasks();
-        taskManager.renderTasks(incompleteTasks);  // Render only incomplete tasks
+        taskManager.renderTasks(incompleteTasks);
     }
 };
 

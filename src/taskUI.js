@@ -17,8 +17,9 @@ class TaskUI {
 
         const checkbox = project.querySelector('.task-checkbox');
         checkbox.addEventListener('change', () => {
-            task.completed = checkbox.checked;  // Update completed status
-            project.remove();  // Optionally remove task from UI
+            task.completed = checkbox.checked;
+            project.remove();
+            this.saveTasks();
         });
     }
 
