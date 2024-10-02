@@ -1,5 +1,9 @@
+import TaskManager from "./taskManager";
+
 class TaskUI {
-    constructor() {}
+    constructor(taskManager) {
+        this.taskManager = taskManager;
+    }
 
     displayTask(task) {
         const taskContainer = document.querySelector('.task-container');
@@ -19,7 +23,7 @@ class TaskUI {
         checkbox.addEventListener('change', () => {
             task.completed = checkbox.checked;
             project.remove();
-            this.saveTasks();
+
         });
     }
 
@@ -30,6 +34,8 @@ class TaskUI {
         }
 
     }
+
+
 }
 
 export default TaskUI;

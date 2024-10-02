@@ -18,13 +18,14 @@ class TaskManager {
         } else {
             this.renderTasks(this.getIncompleteTasks());
         }
-        
+        this.updateTaskCounts();
 
-        
+
     }
 
     removeTask(taskIndex) {
         this.tasks.splice(taskIndex, 1);
+        this.updateTaskCounts();
         this.saveTasks();
     }
 
@@ -56,6 +57,18 @@ class TaskManager {
         return this.tasks.filter(task => !task.completed);
     }
 
+    getAllTaskCount() {
+        return this.tasks.length; // Total number of tasks
+    }
+
+    getTodayTaskCount() {
+        return this.getTodayTasks().length; // Number of tasks due today
+    }
+
+    getCompletedTaskCount() {
+        return this.getCompletedTasks().length; // Number of completed tasks
+    }
+
 
     saveTasks() {
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
@@ -65,6 +78,16 @@ class TaskManager {
     loadTasks() {
         const tasks = localStorage.getItem('tasks');
         return tasks ? JSON.parse(tasks) : [];
+    }
+
+    updateTaskCounts() {
+        const allCount = document.getElementById('all-count');
+        const todayCount = document.getElementById('today-count');
+        const completedCount = document.getElementById('completed-count');
+
+        if (allCount) allCount.innerText = this.getAllTaskCount();
+        if (todayCount) todayCount.innerText = this.getTodayTaskCount();
+        if (completedCount) completedCount.innerText = this.getCompletedTaskCount();
     }
 }
 

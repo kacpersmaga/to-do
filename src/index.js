@@ -8,6 +8,7 @@ import TaskUI from './taskUI.js'
 const taskManager = new TaskManager();
 const taskForm = new TaskForm(taskManager);
 
+
 const allPage = createAllPage(taskManager, taskForm);
 const todayPage = createTodayPage(taskManager, taskForm);
 const completedPage = createCompletedPage(taskManager, taskForm);
@@ -29,6 +30,8 @@ const selectPage = (page) => {
         const incompleteTasks = taskManager.getIncompleteTasks();
         taskManager.renderTasks(incompleteTasks);
     }
+
+    taskManager.updateTaskCounts();
 };
 
 document.querySelector('#all').addEventListener('click', () => selectPage(allPage));
