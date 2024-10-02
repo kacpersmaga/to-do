@@ -1,4 +1,4 @@
-import TaskManager from "./taskManager";
+import TaskManager from './taskManager.js';
 
 class TaskUI {
     constructor(taskManager) {
@@ -21,7 +21,9 @@ class TaskUI {
 
         const checkbox = project.querySelector('.task-checkbox');
         checkbox.addEventListener('change', () => {
-            task.completed = checkbox.checked;
+            task.completed = task.completed = !task.completed;
+            this.taskManager.saveTasks();
+            this.taskManager.updateTaskCounts();
             project.remove();
 
         });

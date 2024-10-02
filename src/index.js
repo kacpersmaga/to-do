@@ -7,6 +7,7 @@ import TaskUI from './taskUI.js'
 
 const taskManager = new TaskManager();
 const taskForm = new TaskForm(taskManager);
+const taskUI = new TaskUI(taskManager);
 
 
 const allPage = createAllPage(taskManager, taskForm);

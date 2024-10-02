@@ -3,8 +3,8 @@ import TaskUI from './taskUI.js';
 
 class TaskManager {
     constructor() {
-        this.taskUI = new TaskUI();
         this.tasks = this.loadTasks();
+        this.taskUI = new TaskUI(this); 
     }
 
     addTask(task, category) {
@@ -58,15 +58,15 @@ class TaskManager {
     }
 
     getAllTaskCount() {
-        return this.tasks.length; // Total number of tasks
+        return this.tasks.length; 
     }
 
     getTodayTaskCount() {
-        return this.getTodayTasks().length; // Number of tasks due today
+        return this.getTodayTasks().length;
     }
 
     getCompletedTaskCount() {
-        return this.getCompletedTasks().length; // Number of completed tasks
+        return this.getCompletedTasks().length;
     }
 
 
