@@ -173,7 +173,7 @@ main {
 .task-checkbox {
   position: relative;
   left: 130px;
-  top: 10px;
+  top: -10px;
   appearance: none;
   width: 15px;
   height: 15px;
