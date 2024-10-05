@@ -45,16 +45,16 @@ class TaskForm {
         });
     }
 
-    handleTaskFormSubmission(taskCreateInfo, currentCategory) {
+    handleTaskFormSubmission(taskCreateInfo, currentCategory, projectName = '') {
         taskCreateInfo.addEventListener('submit', (event) => {
             event.preventDefault();
-
+            
             const taskName = taskCreateInfo.querySelector('#task').value;
             const dueDate = taskCreateInfo.querySelector('#due-date').value;
             const priority = taskCreateInfo.querySelector('#priority').value;
 
-            const task = new Task(taskName, dueDate, priority);
-            this.taskManager.addTask(task, currentCategory);
+            const task = new Task(taskName, dueDate, priority, projectName);
+            this.taskManager.addTask(task, currentCategory, projectName);
 
             taskCreateInfo.remove();
             document.querySelector('.add-task-button').style.display = 'block';

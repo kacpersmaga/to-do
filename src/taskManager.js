@@ -7,7 +7,7 @@ class TaskManager {
         this.taskUI = new TaskUI(this); 
     }
 
-    addTask(task, category) {
+    addTask(task, category, projectName) {
         this.tasks.push(task);
         this.saveTasks();
 
@@ -15,12 +15,20 @@ class TaskManager {
             this.renderTasks(this.getTodayTasks());
         } else if (category === 'completed') {
             this.renderTasks(this.getCompletedTasks());
-        } else {
+        } else if (category === 'all') {
             this.renderTasks(this.getIncompleteTasks());
+        } else {
+            this.renderTasks(this.getTasksByProject(projectName));
         }
         this.updateTaskCounts();
 
+        
 
+
+    }
+
+    getTasksByProject(projectName) {
+        return this.tasks.filter(task => task.projectName === projectName);
     }
 
     removeTask(taskIndex) {

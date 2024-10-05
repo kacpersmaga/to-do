@@ -3,11 +3,13 @@ import { createAllPage, createTodayPage, createCompletedPage } from './pages.js'
 import TaskManager from './taskManager.js';
 import TaskForm from './taskForm.js'; 
 import TaskUI from './taskUI.js'
+import Project from './project.js'
 
 
 const taskManager = new TaskManager();
 const taskForm = new TaskForm(taskManager);
 const taskUI = new TaskUI(taskManager);
+const project = new Project(taskManager, taskForm);
 
 
 const allPage = createAllPage(taskManager, taskForm);
@@ -38,5 +40,7 @@ const selectPage = (page) => {
 document.querySelector('#all').addEventListener('click', () => selectPage(allPage));
 document.querySelector('#today').addEventListener('click', () => selectPage(todayPage));
 document.querySelector('#completed').addEventListener('click', () => selectPage(completedPage));
+document.querySelector('#project-create-button').addEventListener('click', () => project.showForm());
+
 
 selectPage(allPage);
