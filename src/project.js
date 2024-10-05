@@ -1,8 +1,9 @@
 class Project {
-    constructor (taskManager, taskForm) {
+    constructor(taskManager, taskForm) {
         this.taskManager = taskManager;
         this.taskForm = taskForm;
         this.projects = [];
+        this.loadProjects(); // Load projects from localStorage when initialized
     }
 
     createProject = (taskManager, taskForm, projectName) => {
@@ -10,26 +11,24 @@ class Project {
         const header = document.createElement('h2');
         const taskContainer = document.createElement('div');
         const addTaskButton = document.createElement('button');
-    
+
         allPage.classList.add('page-container');
         taskContainer.classList.add('task-container');
         addTaskButton.classList.add('add-task-button');
-    
+
         header.innerText = `${projectName} To-Dos`;
         addTaskButton.textContent = 'Add a new task';
-    
-        
-    
+
         addTaskButton.addEventListener('click', () => {
             addTaskButton.style.display = 'none';
-    
+
             const form = taskForm.createTaskForm();
             taskContainer.appendChild(form);
-    
+
             taskForm.handleTaskFormSubmission(form, '', projectName);
             taskForm.addCancelButtonListener(form);
         });
-    
+
         allPage.append(header, taskContainer, addTaskButton);
         return allPage;
     };
@@ -45,14 +44,14 @@ class Project {
                 <button>x</button>
             </div>`;
         projects.appendChild(project);
-    
 
         this.projects.push({ name: projectName, ui: project });
-    
+        this.saveProjects();
+
         project.addEventListener('click', () => {
             this.selectProject(projectName);
         });
-    
+
         const removeButton = project.querySelector('button');
         removeButton.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -78,25 +77,40 @@ class Project {
             e.preventDefault();
             const projectName = document.querySelector('#project-form-name').value;
             this.createProjectInNav(projectName);
-            form.reset(); 
+            form.reset();
         });
     }
 
     selectProject(projectName) {
         const main = document.querySelector('main');
-        
-
         main.innerHTML = '';
-    
 
         const projectUI = this.createProject(this.taskManager, this.taskForm, projectName);
-    
-
         main.appendChild(projectUI);
-    
 
         const tasks = this.taskManager.getTasksByProject(projectName);
         this.taskManager.renderTasks(tasks);
+    }
+
+    saveProjects() {
+        localStorage.setItem('projects', JSON.stringify(this.projects.map(p => p.name)));
+    }
+
+    loadProjects() {
+        const storedProjects = JSON.parse(localStorage.getItem('projects')) || [];
+        
+        const projectsContainer = document.querySelector('.projects');
+        projectsContainer.innerHTML = '';
+
+        storedProjects.forEach(projectName => {
+            this.createProjectInNav(projectName);
+        });
+    }
+
+    removeProject(projectElement, projectName) {
+        projectElement.remove();
+        this.projects = this.projects.filter(p => p.name !== projectName);
+        this.saveProjects();
     }
 }
 
