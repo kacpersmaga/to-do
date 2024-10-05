@@ -15,17 +15,21 @@ body {
   width: 100vw;
 }
 
+/* Sidebar Styling */
 .side-bar {
   background-color: #a1a1aa;
   grid-column: 1;
   padding: 20px;
 }
 
+/* Main Content Styling */
 main {
   grid-column: 2;
   background-color: color-mix(in srgb, var(--gray) 50%, #a1a1aa 50%);
+  padding: 20px;
 }
 
+/* Filter Items */
 .filter-item {
   display: flex;
   align-items: center;
@@ -35,7 +39,6 @@ main {
 .filter-name {
   display: flex;
   align-items: center;
-  flex-direction: row;
   gap: 5px;
   font-size: 1rem;
   font-weight: 500;
@@ -48,33 +51,37 @@ main {
   margin-bottom: 30px;
 }
 
+/* Project Container */
 .projects-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* Project Header */
 .project-header {
   font-size: 1.5rem;
   font-weight: 600;
   display: flex;
   justify-content: space-between;
-
-  button {
-    border: none;
-    background-color: #a1a1aa;
-    font-size: 1.5rem;
-  }
 }
 
+.project-header button {
+  border: none;
+  background-color: #a1a1aa;
+  font-size: 1.5rem;
+}
+
+/* Project Items */
 .project {
   display: flex;
   justify-content: space-between;
-  button {
-    border: none;
-    background-color: #a1a1aa;
-    font-size: 1.2rem;
-  }
+}
+
+.project button {
+  border: none;
+  background-color: #a1a1aa;
+  font-size: 1.2rem;
 }
 
 .project-options {
@@ -82,12 +89,9 @@ main {
   gap: 10px;
 }
 
+/* Add Task Button */
 .add-task {
   cursor: pointer;
-}
-
-main {
-  padding: 20px;
 }
 
 .add-task-button {
@@ -99,6 +103,7 @@ main {
   padding: 5px 10px;
 }
 
+/* Task Info Container */
 .task-info-container {
   background-color: var(--gray);
   padding: 10px 20px;
@@ -106,28 +111,20 @@ main {
   box-shadow: 0px 0px 24px 5px rgb(0, 0, 0, 0.4);
   width: 250px;
   font-size: 1.2rem;
-
-  input {
-    border: none;
-    background-color: white;
-    border-radius: 10px;
-    min-width: 200px;
-    min-height: 25px;
-    text-align: center;
-    font-weight: 600;
-  }
-
-  select {
-    border: none;
-    background-color: white;
-    border-radius: 10px;
-    min-width: 200px;
-    min-height: 25px;
-    text-align: center;
-    font-weight: 600;
-  }
 }
 
+.task-info-container input,
+.task-info-container select {
+  border: none;
+  background-color: white;
+  border-radius: 10px;
+  min-width: 200px;
+  min-height: 25px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Item Container */
 .item {
   display: flex;
   flex-direction: column;
@@ -137,20 +134,22 @@ main {
   margin-bottom: 10px;
 }
 
+/* Decisive Buttons */
 .decisive-buttons {
   margin-top: 15px;
   display: flex;
   justify-content: center;
   gap: 10px;
-
-  button {
-    border: none;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 1.1rem;
-  }
 }
 
+.decisive-buttons button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+}
+
+/* Project Item */
 .project-item {
   background-color: var(--gray);
   padding: 10px 20px;
@@ -163,16 +162,14 @@ main {
   height: 150px;
 }
 
+/* Task Container */
 .task-container {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
 }
 
-.priority {
-  margin-bottom: 0;
-}
-
+/* Task Checkbox */
 .task-checkbox {
   position: relative;
   left: 130px;
@@ -184,4 +181,35 @@ main {
   background-color: orange;
   border-radius: 10px;
   cursor: pointer;
+}
+
+/* Project Form */
+.project-form-container {
+  position: relative;
+  left: 650px;
+  top: 300px;
+}
+
+.project-form {
+  background-color: var(--gray);
+  height: 200px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.project-form #project-form-name {
+  margin-bottom: 10px;
+  border: none;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+.project-form #submit-button {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
 }
