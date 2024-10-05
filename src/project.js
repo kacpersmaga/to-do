@@ -40,7 +40,6 @@ class Project {
         project.innerHTML = `
             <span class="project-name"># ${projectName}</span> 
             <div class="project-options">
-                <span>0</span>
                 <button>x</button>
             </div>`;
         projects.appendChild(project);
