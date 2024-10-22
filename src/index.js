@@ -1,7 +1,7 @@
 import './styles.css';
-import UI from './UI';
+import ProjectUI from './UI';
 
-const ui  = new UI();
+const ui  = new ProjectUI();
 
 const addProjectButton = document.querySelector('#project-create-button');
 if (addProjectButton) {

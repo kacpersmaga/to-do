@@ -1,9 +1,13 @@
-class UI {
-    constructor() {
+import Project from './project';
 
+
+class ProjectUI {
+    constructor() {
+        this.projects = Project.getAllProjects();
+        this.renderProjects();
     }
 
-    // PROJECT
+
     renderProjectForm() {
         const main = document.querySelector('main');
         main.innerHTML = '';
@@ -25,6 +29,24 @@ class UI {
         return projectFormContainer;
     }
 
+    createProject(projectName) {
+        const newProject = new Project(projectName);
+        this.projects.push(newProject);
+        newProject.saveProject();
+        return newProject;
+    }
+
+    renderProjects() {
+        this.projects = Project.getAllProjects();
+        const projectsContainer = document.querySelector('.projects');
+        projectsContainer.innerHTML = '';
+    
+        this.projects.forEach(project => {
+            const projectElement = this.createProjectElement(project);
+            this.attachDeleteButtonHandler(projectElement, project.name);
+            projectsContainer.appendChild(projectElement);
+        });
+    }
 
     appendFormToMain(main, projectFormContainer) {
         main.appendChild(projectFormContainer);
@@ -35,39 +57,59 @@ class UI {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const projectName = document.querySelector('#project-form-name').value;
-            this.appendProjectToNavigation(projectName);
+            const newProject = this.createProject(projectName);
+            this.appendProjectToNavigation(newProject);
         });
     }
 
-    appendProjectToNavigation(projectName) {
-        const projects = document.querySelector('.projects');
-        const project = this.createProjectElement(projectName);
-        this.attachDeleteButtonHandler(project);
-        projects.appendChild(project);
+    appendProjectToNavigation(project) {
+        const projectsContainer = document.querySelector('.projects');
+        const projectElement = this.createProjectElement(project);
+        this.attachDeleteButtonHandler(projectElement, project.name);
+        projectsContainer.appendChild(projectElement);
     }
 
-    createProjectElement(projectName) {
-        const project = document.createElement('div');
-        project.classList.add('project');
-        project.innerHTML = `
-            <span class="project-name"># ${projectName}</span> 
+    createProjectElement(project) {
+        const projectElement = document.createElement('div');
+        projectElement.classList.add('project');
+        projectElement.innerHTML = `
+            <span class="project-name"># ${project.name}</span> 
             <div class="project-options">
                 <button class="delete-button">x</button>
             </div>`;
 
-        return project;
+        return projectElement;
     }
 
-    attachDeleteButtonHandler(project) {
-        const removeButton = project.querySelector('.delete-button');
-        removeButton.addEventListener('click', (e) => {
-            this.removeProject(project);
+    attachDeleteButtonHandler(projectElement, projectName) {
+        const removeButton = projectElement.querySelector('.delete-button');
+        removeButton.addEventListener('click', () => {
+            this.removeProject(projectName);
         });
     }
 
-    removeProject(project) {
-        project.remove();
+    removeProject(projectName) {
+        Project.removeProjectByName(projectName);
+        this.renderProjects();
     }
+    
+    createProjectUI = (project) => {
+        const allPage = document.createElement('div');
+        const header = document.createElement('h2');
+        const taskContainer = document.createElement('div');
+        const addTaskButton = document.createElement('button');
+
+        allPage.classList.add('page-container');
+        taskContainer.classList.add('task-container');
+        addTaskButton.classList.add('add-task-button');
+
+        header.innerText = `${project.name} To-Dos`;
+        addTaskButton.textContent = 'Add a new task';
+
+        allPage.append(header, taskContainer, addTaskButton);
+        return allPage;
+    };
+
 }
 
-export default UI;
+export default ProjectUI;
