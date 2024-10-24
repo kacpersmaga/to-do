@@ -110,12 +110,17 @@ main {
 
 /* Task Info Container */
 .task-info-container {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: var(--gray);
   padding: 10px 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 24px 5px rgb(0, 0, 0, 0.4);
   width: 250px;
   font-size: 1.2rem;
+  place-items: center;
 }
 
 .task-info-container input,
@@ -177,13 +182,13 @@ main {
 /* Task Checkbox */
 .task-checkbox {
   position: relative;
-  left: 130px;
-  top: -10px;
+  left: 110px;
+  top: -30px;
   appearance: none;
   width: 15px;
   height: 15px;
   border: 2px solid orange;
-  background-color: orange;
+  background-color: unset;
   border-radius: 10px;
   cursor: pointer;
 }

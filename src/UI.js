@@ -1,4 +1,5 @@
 import Project from './project';
+import Task from './task';
 
 
 class ProjectUI {
@@ -44,6 +45,7 @@ class ProjectUI {
         this.projects.forEach(project => {
             const projectElement = this.createProjectElement(project);
             this.attachDeleteButtonHandler(projectElement, project.name);
+            this.handleShowingTasks(projectElement, project);
             projectsContainer.appendChild(projectElement);
         });
     }
@@ -59,6 +61,8 @@ class ProjectUI {
             const projectName = document.querySelector('#project-form-name').value;
             const newProject = this.createProject(projectName);
             this.appendProjectToNavigation(newProject);
+            this.renderProjects();  // Refresh the projects list
+            this.renderProjectTasks(newProject);  // Display the new project
         });
     }
 
@@ -109,6 +113,111 @@ class ProjectUI {
         allPage.append(header, taskContainer, addTaskButton);
         return allPage;
     };
+
+    handleShowingTasks(projectElement, project){
+        projectElement.addEventListener('click', (e) => {          
+            if (e.target.classList.contains('delete-button')) return;
+            this.renderProjectTasks(project);
+        });
+    }
+
+    renderProjectTasks(project) {
+        const main = document.querySelector('main');
+        main.innerHTML = '';
+        const projectPage = this.createProjectUI(project);
+        main.appendChild(projectPage);
+    
+        const taskContainer = projectPage.querySelector('.task-container');
+    
+        project.tasks.forEach(task => {
+            const taskElement = this.createTaskElement(task, project);
+            taskContainer.appendChild(taskElement);
+        });
+    
+        const addTaskButton = projectPage.querySelector('.add-task-button');
+        addTaskButton.addEventListener('click', () => {
+            this.renderTaskForm(project);
+        });
+    }
+
+    createTaskElement(task, project) {
+        const taskContainer = document.querySelector('.task-container');
+        const taskElement = document.createElement('div');
+        taskElement.classList.add('project-item');
+    
+        taskElement.innerHTML = `
+            <p class="task-name">${task.name}</p>
+            <p class="due-date">${task.dueDate}</p>
+            <p class="priority">${task.priority}</p>
+            <input type="checkbox" class="task-checkbox">
+        `;
+    
+        taskContainer.appendChild(taskElement);
+    
+        const completeButton = taskElement.querySelector('.task-checkbox');
+    
+        completeButton.checked = task.completed;
+        completeButton.style.backgroundColor = task.completed ? 'red' : 'orange';
+    
+        completeButton.addEventListener('click', () => {
+            task.completed = completeButton.checked;
+            completeButton.style.backgroundColor = task.completed ? 'red' : 'orange';
+            project.saveProject(); 
+        });
+    
+        return taskElement;
+    }
+    
+
+    renderTaskForm(project) {
+        const main = document.querySelector('main');
+    
+        const taskFormContainer = document.createElement('div');
+        taskFormContainer.classList.add('task-info-container');
+        taskFormContainer.innerHTML = `
+        <form class="task-form">
+            <div class="item">
+                <label for="task">Task</label>
+                <input type="text" id="task-name" name="task-name" required />
+            </div>
+            <div class="item">
+                <label for="due-date">Due Date</label>
+                <input type="date" id="due-date" name="due-date" required />
+            </div>
+            <div class="item">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority" required>
+                    <option value="" disabled selected>Select priority</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="decisive-buttons">
+                <button type="submit" id="submit-task">Add</button>
+                <button type="button" id="cancel-task">Cancel</button>
+            </div>
+        </form>
+        `;
+    
+        main.innerHTML = '';
+        main.appendChild(taskFormContainer);
+
+
+    
+        const form = taskFormContainer.querySelector('.task-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const taskName = form.querySelector('#task-name').value;
+            const dueDate = form.querySelector('#due-date').value;
+            const priority = form.querySelector('#priority').value;
+    
+            const newTask = new Task(taskName, dueDate, priority);
+            project.addTask(newTask);
+    
+            this.renderProjectTasks(project);
+        });
+    }
 
 }
 
