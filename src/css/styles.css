@@ -188,9 +188,14 @@ main {
   width: 15px;
   height: 15px;
   border: 2px solid orange;
-  background-color: unset;
+  background-color: orange;
   border-radius: 10px;
   cursor: pointer;
+}
+
+.task-checkbox:checked {
+  background-color: red;
+  border-color: red;
 }
 
 /* Project Form */
