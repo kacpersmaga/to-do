@@ -1,4 +1,4 @@
-import './styles.css';
+import '../styles.css';
 import ProjectUI from './UI';
 
 const ui  = new ProjectUI();
