@@ -2,6 +2,16 @@
 
 :root {
   --gray: #e4e4e7;
+  --sidebar-bg: #a1a1aa;
+  --primary-padding: 20px;
+  --border-radius: 10px;
+  --box-shadow: 0px 0px 24px 5px rgba(0, 0, 0, 0.4);
+  --font-size-base: 1rem;
+  --font-size-lg: 1.2rem;
+  --font-size-xl: 1.5rem;
+  --gap-small: 10px;
+  --gap-medium: 15px;
+  --gap-large: 20px;
 }
 
 * {
@@ -21,16 +31,16 @@ body {
 
 /* Sidebar Styling */
 .side-bar {
-  background-color: #a1a1aa;
+  background-color: var(--sidebar-bg);
   grid-column: 1;
-  padding: 20px;
+  padding: var(--primary-padding);
 }
 
 /* Main Content Styling */
 main {
   grid-column: 2;
-  background-color: color-mix(in srgb, var(--gray) 50%, #a1a1aa 50%);
-  padding: 20px;
+  background-color: color-mix(in srgb, var(--gray) 50%, var(--sidebar-bg) 50%);
+  padding: var(--primary-padding);
   height: 100vh;
 }
 
@@ -44,28 +54,28 @@ main {
 .filter-name {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 1rem;
+  gap: var(--gap-small);
+  font-size: var(--font-size-base);
   font-weight: 500;
 }
 
 .filter-items-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 30px;
+  gap: var(--gap-small);
+  margin-bottom: var(--gap-medium);
 }
 
 /* Project Container */
 .projects-container {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--gap-medium);
 }
 
 /* Project Header */
 .project-header {
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
   font-weight: 600;
   display: flex;
   justify-content: space-between;
@@ -73,8 +83,8 @@ main {
 
 .project-header button {
   border: none;
-  background-color: #a1a1aa;
-  font-size: 1.5rem;
+  background-color: var(--sidebar-bg);
+  font-size: var(--font-size-xl);
 }
 
 /* Project Items */
@@ -85,13 +95,13 @@ main {
 
 .project button {
   border: none;
-  background-color: #a1a1aa;
-  font-size: 1.2rem;
+  background-color: var(--sidebar-bg);
+  font-size: var(--font-size-lg);
 }
 
 .project-options {
   display: flex;
-  gap: 10px;
+  gap: var(--gap-small);
 }
 
 /* Add Task Button */
@@ -102,36 +112,38 @@ main {
 .add-task-button {
   border: none;
   background-color: var(--gray);
-  border-radius: 10px;
-  font-size: 1rem;
-  font-family: "Roboto";
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
   padding: 5px 10px;
 }
 
 /* Task Info Container */
 .task-info-container {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--gray);
-  padding: 10px 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 24px 5px rgb(0, 0, 0, 0.4);
-  width: 250px;
-  font-size: 1.2rem;
-  place-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .task-info-container input,
 .task-info-container select {
   border: none;
   background-color: white;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   min-width: 200px;
   min-height: 25px;
   text-align: center;
   font-weight: 600;
+}
+
+/* Task Form */
+.task-form {
+  background-color: var(--gray);
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  width: 250px;
+  font-size: var(--font-size-lg);
 }
 
 /* Item Container */
@@ -140,22 +152,22 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  margin-bottom: 10px;
+  gap: var(--gap-small);
+  margin-bottom: var(--gap-small);
 }
 
 /* Decisive Buttons */
 .decisive-buttons {
-  margin-top: 15px;
+  margin-top: var(--gap-medium);
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: var(--gap-small);
 }
 
 .decisive-buttons button {
   border: none;
   padding: 5px 10px;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   font-size: 1.1rem;
 }
 
@@ -163,11 +175,11 @@ main {
 .project-item {
   background-color: var(--gray);
   padding: 10px 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 24px 5px rgb(0, 0, 0, 0.4);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   width: 250px;
-  font-size: 1.2rem;
-  margin-bottom: 15px;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--gap-medium);
   text-align: center;
   height: 150px;
 }
@@ -175,7 +187,7 @@ main {
 /* Task Container */
 .task-container {
   display: flex;
-  gap: 20px;
+  gap: var(--gap-large);
   flex-wrap: wrap;
 }
 
@@ -189,7 +201,7 @@ main {
   height: 15px;
   border: 2px solid orange;
   background-color: orange;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   cursor: pointer;
 }
 
@@ -214,18 +226,18 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
 }
 
 .project-form #project-form-name {
-  margin-bottom: 10px;
+  margin-bottom: var(--gap-small);
   border: none;
   padding: 3px 10px;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
 }
 
 .project-form #submit-button {
   border: none;
-  border-radius: 10px;
-  padding: 5px 10px;
+  border-radius: var(--border-radius);
+  padding: 10px 20px;
 }
