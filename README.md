@@ -45,6 +45,14 @@ While the core functionality is solid, the **front-end design** can be improved 
 - Adding a **responsive layout** for mobile devices.
 - Improving the **styling** with a modern UI framework like **Tailwind CSS** or **Bootstrap**.
 - Adding **animations** and better error handling for a smoother user experience.
+  
+## 📸 Screenshots
+![image](https://github.com/user-attachments/assets/16f37d59-6dc9-4438-bba0-6c8e1a76a4af)
+
+![image](https://github.com/user-attachments/assets/3523ff24-d1d4-408f-aa61-d080de4867e6)
+
+![image](https://github.com/user-attachments/assets/93fd62ac-8e0f-4d83-9d5b-b818aeb70e29)
+
 
 ## 🛠️ Tools & Technologies
 
